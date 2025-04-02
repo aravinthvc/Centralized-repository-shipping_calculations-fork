@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freight Calculator - Logistics Company</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .calculator {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Logistics Company Freight Calculator</h1>
+    </header>
+    <div class="container">
+        <div class="calculator">
+            <h2>Calculate Your Freight Cost</h2>
+            <div class="form-group">
+                <label for="weight">Weight (kg):</label>
+                <input type="number" id="weight" placeholder="Enter weight">
+            </div>
+            <div class="form-group">
+                <label for="distance">Distance (km):</label>
+                <input type="number" id="distance" placeholder="Enter distance">
+            </div>
+            <div class="form-group">
+                <label for="service">Service Type:</label>
+                <select id="service">
+                    <option value="standard">Standard</option>
+                    <option value="express">Express</option>
+                </select>
+            </div>
+            <button class="btn" onclick="calculateFreight()">Calculate</button>
+            
+            <div class="result" id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        function calculateFreight() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const distance = parseFloat(document.getElementById('distance').value);
+            const service = document.getElementById('service').value;
+
+            if (isNaN(weight) || isNaN(distance)) {
+                document.getElementById('result').textContent = "Please enter valid weight and distance.";
+                return;
+            }
+
+            let costPerKm = service === 'express' ? 2 : 1; // Express costs more
+            let totalCost = weight * distance * costPerKm;
+
+            document.getElementById('result').textContent = `Estimated Freight Cost: $${totalCost.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
